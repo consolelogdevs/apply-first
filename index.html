@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apply First · free job link builder</title>
+<meta name="description" content="Free tool from console log devs. Find LinkedIn jobs from the last hour, jobs on company career pages and hiring posts. No Premium needed.">
+<meta property="og:title" content="Apply First · free job link builder">
+<meta property="og:description" content="Last-hour LinkedIn jobs, hidden career pages and hiring posts. Free, no Premium needed.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23E8603C'/%3E%3Ccircle cx='32' cy='29' r='13' fill='%23F7C842'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: one narrow column, a form on top, then three link groups that mirror the three tips in the reel */
+:root{
+  --bg:#F2F4F9; --card:#FFFFFF; --ink:#0D2657; --muted:#5A6A8C; --line:#DDE3EF;
+  --accent:#E8603C; --accent-ink:#FFFFFF; --mark:#F2D94E; --mark-ink:#0D2657; --soft:#E8ECF5;
+  --display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0A1B40; --card:#102A5C; --ink:#F2F5FC; --muted:#A9B7D6; --line:#1E3C7A;
+  --accent:#F07150; --accent-ink:#FFFFFF; --mark:#F2D94E; --mark-ink:#0D2657; --soft:#0D2350; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A1B40; --card:#102A5C; --ink:#F2F5FC; --muted:#A9B7D6; --line:#1E3C7A;
+  --accent:#F07150; --accent-ink:#FFFFFF; --mark:#F2D94E; --mark-ink:#0D2657; --soft:#0D2350; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.brand{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.brand b{color:var(--accent);font-weight:700}
+h1{font-size:clamp(40px,9vw,58px);line-height:.98;letter-spacing:-.03em;margin:6px 0 10px;font-weight:800;text-wrap:balance}
+h1 em{font-style:normal;background:linear-gradient(transparent 58%,var(--mark) 58%);color:inherit;padding:0 .08em}
+.lede{color:var(--muted);margin:0;max-width:52ch}
+form{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);min-width:0}
+input[type=text]{font:500 17px var(--display);color:var(--ink);background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;min-width:0}
+input[type=text]:focus-visible,button:focus-visible,a:focus-visible,.tog input:focus-visible+span{outline:3px solid var(--accent);outline-offset:2px}
+.tog{grid-column:1/-1;flex-direction:row;align-items:center;gap:10px;text-transform:none;letter-spacing:0;font-size:15px;color:var(--ink);font-weight:500;cursor:pointer}
+.tog input{position:absolute;opacity:0;width:1px;height:1px}
+.tog span{width:46px;height:28px;border-radius:14px;background:var(--line);position:relative;flex:none;transition:background .15s}
+.tog span:after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .15s}
+.tog input:checked+span{background:var(--accent)}
+.tog input:checked+span:after{left:21px}
+section{display:flex;flex-direction:column;gap:10px}
+.sh{display:flex;align-items:baseline;gap:10px}
+.sh .n{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700}
+.sh h2{font-size:22px;margin:0;letter-spacing:-.01em}
+.why{margin:0;color:var(--muted);font-size:15px}
+.link{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 14px 14px 16px;display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center}
+.link .t{font-weight:700;font-size:17px}
+.link .u{grid-column:1/-1;font-family:var(--mono);font-size:12px;color:var(--muted);word-break:break-all;line-height:1.45;min-width:0}
+.link .u mark{background:var(--mark);color:var(--mark-ink);border-radius:3px;padding:0 2px}
+.acts{display:flex;gap:8px}
+.btn{font:700 14px var(--display);border-radius:10px;padding:9px 14px;border:1px solid var(--line);background:var(--soft);color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.go{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.foot{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+@media (max-width:460px){form{grid-template-columns:1fr}.link{grid-template-columns:1fr}.acts{justify-content:flex-start}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div>
+    <div class="brand">from <b>console log devs</b></div>
+    <h1>Apply <em>first.</em></h1>
+    <p class="lede">Type your role and city. Get ready-made links for fresh LinkedIn jobs, company career pages and hiring posts. Free, no Premium needed.</p>
+  </div>
+
+  <form id="f" autocomplete="off">
+    <label>Role<input type="text" id="role" value="Frontend Developer" placeholder="e.g. Product Designer"></label>
+    <label>City or country<input type="text" id="loc" value="London" placeholder="Leave empty for anywhere"></label>
+    <label class="tog"><input type="checkbox" id="remote"><span></span>Remote jobs only</label>
+  </form>
+
+  <section>
+    <div class="sh"><span class="n">01</span><h2>Jobs posted in the last hour</h2></div>
+    <p class="why">LinkedIn only offers "Past 24 hours". Changing <code>r86400</code> to <code>r3600</code> in the link shows the last hour.</p>
+    <div id="g1"></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">02</span><h2>Jobs that never reach LinkedIn</h2></div>
+    <p class="why">Google searches straight inside company career pages on Lever, Greenhouse, Ashby and Workable. Results from the past week.</p>
+    <div id="g2"></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="n">03</span><h2>People posting "we're hiring"</h2></div>
+    <p class="why">Newest posts first. Message the person who posted it instead of paying for InMail.</p>
+    <div id="g3"></div>
+  </section>
+
+  <div class="foot">
+    <span>The LinkedIn link tricks are not an official feature and may change. If a link shows nothing, widen the city or try again later.</span>
+    <span>Found this useful? <a href="https://www.instagram.com/console.log.devs/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">Follow console log devs on Instagram</a>.</span>
+  </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const enc=encodeURIComponent;
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function li(role,loc,tpr,remote){
+  let u=`https://www.linkedin.com/jobs/search/?keywords=${enc(role)}`;
+  if(loc)u+=`&location=${enc(loc)}`;
+  if(remote)u+=`&f_WT=2`;
+  return u+`&f_TPR=${tpr}&sortBy=DD`;
+}
+function google(sites,role,loc,remote){
+  const s=sites.length>1?'('+sites.map(x=>'site:'+x).join(' OR ')+')':'site:'+sites[0];
+  const q=`${s} "${role}"${loc?' '+loc:''}${remote?' remote':''}`;
+  return {q,u:`https://www.google.com/search?q=${enc(q)}&tbs=qdr:w`};
+}
+function card(title,url,show,hl){
+  let disp=esc(show||url);
+  if(hl)disp=disp.replace(esc(hl),`<mark>${esc(hl)}</mark>`);
+  return `<div class="link"><div class="t">${esc(title)}</div><div class="acts"><button class="btn" type="button" data-copy="${esc(url)}">Copy</button><a class="btn go" href="${esc(url)}" target="_blank" rel="noopener">Open</a></div><div class="u">${disp}</div></div>`;
+}
+function build(){
+  const role=$('role').value.trim()||'Frontend Developer', loc=$('loc').value.trim(), rem=$('remote').checked;
+  const hour=li(role,loc,'r3600',rem), day=li(role,loc,'r86400',rem);
+  $('g1').innerHTML=`<div style="display:flex;flex-direction:column;gap:10px">${card('Last hour',hour,null,'f_TPR=r3600')}${card('Last 24 hours',day,null,'f_TPR=r86400')}</div>`;
+  const all=google(['jobs.lever.co','greenhouse.io','jobs.ashbyhq.com','apply.workable.com'],role,loc,rem);
+  const one=[['Lever only','jobs.lever.co'],['Greenhouse only','greenhouse.io'],['Ashby only','jobs.ashbyhq.com']].map(([t,d])=>{const g=google([d],role,loc,rem);return card(t,g.u,g.q)}).join('');
+  $('g2').innerHTML=`<div style="display:flex;flex-direction:column;gap:10px">${card('All four at once',all.u,all.q)}${one}</div>`;
+  const kw=`hiring ${role}${loc?' '+loc:''}${rem?' remote':''}`;
+  const posts=`https://www.linkedin.com/search/results/content/?keywords=${enc(kw)}&sortBy=${enc('"date_posted"')}`;
+  $('g3').innerHTML=card('Hiring posts, newest first',posts,`"${kw}" · sorted by latest`);
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-copy]'); if(!b)return;
+  const txt=b.dataset.copy;
+  const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1400)};
+  const fallback=()=>{const u=b.closest('.link').querySelector('.u');const r=document.createRange();r.selectNodeContents(u);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected';setTimeout(()=>b.textContent='Copy',1400)};
+  try{navigator.clipboard.writeText(txt).then(done,fallback)}catch(err){fallback()}
+});
+$('f').addEventListener('submit',e=>e.preventDefault());
+['role','loc','remote'].forEach(id=>$(id).addEventListener('input',build));
+build();
+</script>
+
+</body>
+</html>
